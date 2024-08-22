@@ -1029,7 +1029,7 @@ export KRB5CCNAME=ksimpson.ccache
 
 sudo apt-get install krb5-user
 
-kinit OOREND@REBOUND.HTB (также получить тикет)
+kinit OOREND@REBOUND.HTB (также получить тикет и кеширует на диске)
 
 klist - список билетов керберос
 
