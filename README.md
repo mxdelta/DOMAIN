@@ -1029,6 +1029,8 @@ export KRB5CCNAME=ksimpson.ccache
 
 sudo apt-get install krb5-user
 
+kinit OOREND@REBOUND.HTB (также получить тикет)
+
 klist - список билетов керберос
 
 # Создание Silver Ticket для Administrator
