@@ -152,6 +152,8 @@ https://github.com/mxdelta/SecLists/blob/master/Discovery/DNS/subdomains-top1mil
 
 # Проверка сертификатов
 
+	certipy find -enabled -u 'plaintext$'@172.16.117.3 -p 'o6@ekK5#rlw2rAe' -stdout
+ 
 	certipy-ad find -u svc_ldap@authority.htb -p lDaP_1n_th3_cle4r! -dc-ip 10.10.11.222
 
 * Sertifycate
