@@ -1908,10 +1908,11 @@ rsync 10.129.228.37::public/flag.txt flag.txt
 		sudo responder -I eth0 --lm --disable-ess -v
 		https://ntlmv1.com/login.php (сайт который переводит netntlmv1 в NTLM hash)
 
-# CVE 2026-54121
+# CVE 2026-54121 (уязвимость цетра сертификации)
 
 		https://github.com/aniqfakhrul/CVE-2026-54121
-
+		https://github.com/marcgoam/CVE-2026-54121-CertiGhost
+		
 	
 # Произвольное выполнение файла
 
